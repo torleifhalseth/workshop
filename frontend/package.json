@@ -4,7 +4,7 @@
   "scripts": {
     "prebuild": "sanity typegen generate",
     "build": "next build",
-    "predev": "npm run sanity:typegen",
+    "predev": "pnpm run sanity:typegen",
     "dev": "next dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
