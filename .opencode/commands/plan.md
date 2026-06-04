@@ -1,5 +1,5 @@
 ---
-description: Explore the codebase and create an implementation plan (no implementation), save to /plan
+description: Explore the codebase and create an implementation plan (no implementation), save to .opencode/plan/
 ---
 Investigate the codebase to find all code relevant to: $ARGUMENTS
 
@@ -35,6 +35,6 @@ Anything to watch out for.
 
 ---
 
-Save the plan as a markdown file in the `plan/` folder. Derive the filename from the task description using kebab-case (e.g. `plan/add-hero-block.md`). If a file with that name already exists, overwrite it with the new plan.
+Save the plan as a markdown file in the `.opencode/plan/` folder. Derive the filename from the task description using kebab-case (e.g. `.opencode/plan/add-hero-block.md`). If a file with that name already exists, overwrite it with the new plan.
 
 Return the plan to the user and mention where it was saved.

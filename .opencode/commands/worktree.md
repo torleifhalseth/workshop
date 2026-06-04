@@ -32,15 +32,14 @@ Arguments: `$1` (and remaining args) = branch name. Multiple words are joined wi
 
 5. **Copy environment files and certs** from the main repo to the new worktree:
    ```bash
-   # Root .env files
-   cp .env.local ../<project-name>.worktrees/<branch-name>/ 2>/dev/null || true
+   # Studio .env files
+   cp studio/.env ../<project-name>.worktrees/<branch-name>/studio/ 2>/dev/null || true
 
-   # App-level .env files
-   cp apps/studio/.env.* ../<project-name>.worktrees/<branch-name>/apps/studio/ 2>/dev/null || true
-   cp apps/frontend/.env.* ../<project-name>.worktrees/<branch-name>/apps/frontend/ 2>/dev/null || true
+   # Frontend .env files
+   cp frontend/.env.local ../<project-name>.worktrees/<branch-name>/frontend/ 2>/dev/null || true
 
    # TLS certificates
-   cp -r cert ../<project-name>.worktrees/<branch-name>/cert
+   cp -r cert ../<project-name>.worktrees/<branch-name>/cert 2>/dev/null || true
    ```
 
 6. **Confirm** with a summary. The `cd` command must be the very last line of your response, as **plain unformatted text** (no backticks, no code block, no markdown) so the user can triple-click to select it:
