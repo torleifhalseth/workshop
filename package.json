@@ -17,5 +17,8 @@
   "devDependencies": {
     "@sanity/prettier-config": "^3.0.0",
     "prettier": "^3.8.3"
+  },
+  "dependencies": {
+    "@portabletext/react": "^6.2.0"
   }
 }

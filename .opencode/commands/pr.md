@@ -6,7 +6,22 @@ Commit all changes in the current branch and open a new pull request against `ma
 
 ## Instructions
 
-1. Read `.github/commit-instructions.md` for the commit message rules.
+1. Use conventional commits
+
+- **Format**: `<type>(<scope>)[!]: <description>`
+- **Scope**: MANDATORY. Use folder, component, or `(global)`.
+- **Standards**: Imperative mood ("add", not "added"), lowercase type/scope, max 50 chars, no period.
+- **Breaking Changes**: Add `!` after scope. Footer MUST start with `BREAKING CHANGE:`.
+- **Completeness**: Analyze ALL staged files. List specific changes in the body with bullet points.
+
+### Allowed Types
+
+- **feat**: New feature | **fix**: Bug fix | **docs**: Documentation
+- **style**: Formatting/CSS (no logic) | **refactor**: Code restructuring
+- **perf**: Performance | **test**: Adding/fixing tests
+- **build**: Dependencies/Build system | **ci**: GitHub Actions/Scripts
+- **chore**: Maintenance/Config (.gitignore, etc.)
+
 2. Run `git status` and `git diff --cached --stat` (stage all unstaged changes with `git add -A` first if needed).
 3. Review the full diff with `git diff --cached` to understand every change.
 4. Write a commit message following the rules:
