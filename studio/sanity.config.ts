@@ -38,6 +38,12 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
       return slug ? `/posts/${slug}` : undefined
     case 'page':
       return slug ? `/${slug}` : undefined
+    case 'player':
+      return slug ? `/spiller/${slug}` : undefined
+    case 'nationalTeam':
+      return slug ? `/landslag/${slug}` : undefined
+    case 'club':
+      return slug ? `/klubb/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
@@ -75,6 +81,18 @@ export default defineConfig({
           {
             route: '/posts/:slug',
             filter: `_type == "post" && slug.current == $slug || _id == $slug`,
+          },
+          {
+            route: '/spiller/:slug',
+            filter: `_type == "player" && slug.current == $slug || _id == $slug`,
+          },
+          {
+            route: '/landslag/:slug',
+            filter: `_type == "nationalTeam" && slug.current == $slug || _id == $slug`,
+          },
+          {
+            route: '/klubb/:slug',
+            filter: `_type == "club" && slug.current == $slug || _id == $slug`,
           },
         ]),
         // Locations Resolver API allows you to define where data is being used in your application. https://www.sanity.io/docs/visual-editing/presentation-resolver-api#8d8bca7bfcd7
@@ -114,6 +132,48 @@ export default defineConfig({
                   href: '/',
                 } satisfies DocumentLocation,
               ].filter(Boolean) as DocumentLocation[],
+            }),
+          }),
+          player: defineLocations({
+            select: {
+              name: 'name',
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.name || 'Untitled',
+                  href: resolveHref('player', doc?.slug)!,
+                },
+              ],
+            }),
+          }),
+          nationalTeam: defineLocations({
+            select: {
+              name: 'name',
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.name || 'Untitled',
+                  href: resolveHref('nationalTeam', doc?.slug)!,
+                },
+              ],
+            }),
+          }),
+          club: defineLocations({
+            select: {
+              name: 'name',
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.name || 'Untitled',
+                  href: resolveHref('club', doc?.slug)!,
+                },
+              ],
             }),
           }),
         },

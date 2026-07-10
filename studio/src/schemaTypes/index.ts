@@ -1,4 +1,7 @@
 import {person} from './documents/person'
+import {player} from './documents/player'
+import {nationalTeam} from './documents/nationalTeam'
+import {club} from './documents/club'
 import {page} from './documents/page'
 import {post} from './documents/post'
 import {callToAction} from './objects/callToAction'
@@ -18,6 +21,9 @@ export const schemaTypes = [
   page,
   post,
   person,
+  player,
+  nationalTeam,
+  club,
   // Objects
   button,
   blockContent,

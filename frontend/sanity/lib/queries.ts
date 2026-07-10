@@ -58,7 +58,7 @@ export const getPageQuery = defineQuery(`
 `)
 
 export const sitemapData = defineQuery(`
-  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
+  *[(_type == "page" || _type == "post" || _type == "player" || _type == "nationalTeam" || _type == "club") && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
@@ -97,5 +97,98 @@ export const postPagesSlugs = defineQuery(`
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
+  {"slug": slug.current}
+`)
+
+// Player queries
+export const allPlayersQuery = defineQuery(`
+  *[_type == "player" && defined(slug.current)] | order(name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    position,
+    number,
+    image,
+    birthDate,
+    caps,
+    "club": club->{name, "slug": slug.current},
+    "nationalTeam": nationalTeam->{name, "slug": slug.current},
+  }
+`)
+
+export const playerBySlugQuery = defineQuery(`
+  *[_type == "player" && slug.current == $slug][0] {
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    position,
+    number,
+    image,
+    birthDate,
+    birthPlace,
+    caps,
+    "club": club->{name, "slug": slug.current, image},
+    "nationalTeam": nationalTeam->{name, "slug": slug.current, image},
+  }
+`)
+
+export const playerSlugsQuery = defineQuery(`
+  *[_type == "player" && defined(slug.current)]
+  {"slug": slug.current}
+`)
+
+// National Team queries
+export const nationalTeamBySlugQuery = defineQuery(`
+  *[_type == "nationalTeam" && slug.current == $slug][0] {
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    image,
+    federation,
+    fifaRanking,
+    "players": *[_type == "player" && references(^._id)] | order(name asc) {
+      _id,
+      name,
+      "slug": slug.current,
+      position,
+      number,
+      image,
+      caps,
+      "club": club->{name, "slug": slug.current},
+    },
+  }
+`)
+
+export const nationalTeamSlugsQuery = defineQuery(`
+  *[_type == "nationalTeam" && defined(slug.current)]
+  {"slug": slug.current}
+`)
+
+// Club queries
+export const clubBySlugQuery = defineQuery(`
+  *[_type == "club" && slug.current == $slug][0] {
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    image,
+    league,
+    country,
+    "players": *[_type == "player" && references(^._id)] | order(name asc) {
+      _id,
+      name,
+      "slug": slug.current,
+      position,
+      number,
+      image,
+      caps,
+    },
+  }
+`)
+
+export const clubSlugsQuery = defineQuery(`
+  *[_type == "club" && defined(slug.current)]
   {"slug": slug.current}
 `)

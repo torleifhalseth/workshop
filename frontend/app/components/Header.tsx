@@ -27,6 +27,11 @@ export default async function Header() {
                   About
                 </Link>
               </li>
+              <li>
+                <Link href="/landslag/norge" className="hover:underline">
+                  VM 2026
+                </Link>
+              </li>
 
               <li className="sm:before:w-[1px] sm:before:bg-gray-200 before:block flex sm:gap-4 md:gap-6">
                 <Link
